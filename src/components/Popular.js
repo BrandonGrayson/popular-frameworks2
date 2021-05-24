@@ -9,6 +9,14 @@ export default class Popular extends React.Component {
         this.state = {
             selectedLanguage: 'All'
         }
+
+        this.updateLanguage = this.updateLanguage.bind(this)
+    }
+
+    updateLanguage(selectedLanguage) {
+        this.setState({
+            selectedLanguage
+        })
     }
 
     render() {
@@ -17,7 +25,7 @@ export default class Popular extends React.Component {
                 <List display='flex' flexDirection='row' justifyContent='center' w='100%' h='50%'>
                     {languages.map((language) => (
                         <ListItem>
-                            <Button mr={2} key={language}>
+                            <Button style={language === this.state.selectedLanguage ? {color: 'rgb(187, 46, 31) ' } : null} onClick={() => this.updateLanguage(language)} mr={2} key={language}>
                                 {language}
                             </Button>
                         </ListItem>
