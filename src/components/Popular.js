@@ -6,10 +6,10 @@ export default class Popular extends React.Component {
     render() {
         const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python']
         return (
-                <List display='flex' flexDirection='row'>
+                <List display='flex' flexDirection='row' justifyContent='center' w='100%' h='50%'>
                     {languages.map((language) => (
-                        <ListItem >
-                            <Button key={language}>
+                        <ListItem>
+                            <Button mr={2} key={language}>
                                 {language}
                             </Button>
                         </ListItem>

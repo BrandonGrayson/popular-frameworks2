@@ -12,7 +12,7 @@ export function Layout({ title, description, twitter, openGraph, children }) {
         openGraph={openGraph}
       />
       <Navbar />
-      <Box flexDirection='row' w='100%' >{children}</Box>
+      <Box w='100%' >{children}</Box>
     </>
   );
 }
