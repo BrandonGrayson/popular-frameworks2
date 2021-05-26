@@ -3,6 +3,8 @@ import React from "react";
 import { List, ListItem, ListIcon, OrderedList, UnorderedList } from "@chakra-ui/react"
 // proptypes package
 import PropTypes from "prop-types";
+// utils
+import {fetchPopularRepos} from '../utils/fetchPopularRepos'
 
 function Languages({ selected, onUpdateLanguage }) {
 
@@ -32,7 +34,9 @@ export default class Popular extends React.Component {
         super(props)
 
         this.state = {
-            selectedLanguage: 'All'
+            selectedLanguage: 'All',
+            error: null,
+            repos: null
         }
 
         this.updateLanguage = this.updateLanguage.bind(this)
@@ -40,7 +44,9 @@ export default class Popular extends React.Component {
 
     updateLanguage(selectedLanguage) {
         this.setState({
-            selectedLanguage
+            selectedLanguage,
+            error: null,
+            repos: null
         })
     }
 
