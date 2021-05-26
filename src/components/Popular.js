@@ -8,7 +8,6 @@ function Languages({ selected, onUpdateLanguage }) {
 
     const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python']
 
-
     languages.propTypes = {
         selected: PropTypes.string.isRequired,
         onUpdateLanguage: PropTypes.func.isRequired
@@ -48,7 +47,7 @@ export default class Popular extends React.Component {
     render() {
         
         const { selectedLanguage } = this.state
-        
+
         return (
             <React.Fragment>
                 <Languages selected={selectedLanguage} onUpdateLanguage={this.updateLanguage} />
