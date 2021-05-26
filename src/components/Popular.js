@@ -48,6 +48,19 @@ export default class Popular extends React.Component {
             error: null,
             repos: null
         })
+
+        fetchPopularRepos(selectedLanguage) 
+            .then((repos) => this.setState({
+               repos,
+               error: null 
+            }))
+            .catch(() => {
+                console.warn("Err fetching repos", error)
+
+                this.setState({
+                    error: 'There was an error fetching Repos'
+                })
+            })
     }
 
     render() {
