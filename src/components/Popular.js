@@ -44,6 +44,10 @@ export default class Popular extends React.Component {
 
     }
 
+    componentDidMount() {
+        this.updateLanguage(this.state.selectedLanguage)
+    }
+
     updateLanguage(selectedLanguage) {
         this.setState({
             selectedLanguage,
@@ -71,7 +75,7 @@ export default class Popular extends React.Component {
 
     render() {
 
-        const { selectedLanguage } = this.state
+        const { selectedLanguage, repos, error } = this.state
 
         return (
             <React.Fragment>
@@ -81,7 +85,8 @@ export default class Popular extends React.Component {
 
                 {error && <p>{error}</p>}
 
-        {repos && <pre>{JSON.stringify(repos, null, 2)}</pre>}
+                {repos && <pre>{JSON.stringify(repos, null, 2)}</pre>}
+
             </React.Fragment>
         )
     }
