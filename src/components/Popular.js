@@ -4,7 +4,7 @@ import { List, ListItem, ListIcon, OrderedList, UnorderedList } from "@chakra-ui
 // proptypes package
 import PropTypes from "prop-types";
 // utils
-import {fetchPopularRepos} from '../utils/fetchPopularRepos'
+import { fetchPopularRepos } from '../utils/fetchPopularRepos'
 
 function Languages({ selected, onUpdateLanguage }) {
 
@@ -40,6 +40,8 @@ export default class Popular extends React.Component {
         }
 
         this.updateLanguage = this.updateLanguage.bind(this)
+        this.isLoading = this.isLoading.bind(this)
+
     }
 
     updateLanguage(selectedLanguage) {
@@ -49,10 +51,10 @@ export default class Popular extends React.Component {
             repos: null
         })
 
-        fetchPopularRepos(selectedLanguage) 
+        fetchPopularRepos(selectedLanguage)
             .then((repos) => this.setState({
-               repos,
-               error: null 
+                repos,
+                error: null
             }))
             .catch(() => {
                 console.warn("Err fetching repos", error)
@@ -63,13 +65,23 @@ export default class Popular extends React.Component {
             })
     }
 
+    isLoading() {
+        return this.state.repos === null && this.state.error === null
+    }
+
     render() {
-        
+
         const { selectedLanguage } = this.state
 
         return (
             <React.Fragment>
                 <Languages selected={selectedLanguage} onUpdateLanguage={this.updateLanguage} />
+
+                {this.isLoading && <p>LOADING</p>}
+
+                {error && <p>{error}</p>}
+
+        {repos && <pre>{JSON.stringify(repos, null, 2)}</pre>}
             </React.Fragment>
         )
     }
