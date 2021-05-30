@@ -28,6 +28,15 @@ function Languages({ selected, onUpdateLanguage }) {
     )
 }
 
+// create a function that destructures repos off the state
+function ReposGrid ({ repos }) {
+    return (
+        <ul>
+            <pre>{JSON.stringify(repos[selectedLanguage], null, 2)}</pre> 
+        </ul>
+    )
+}
+
 export default class Popular extends React.Component {
 
     constructor(props) {
@@ -96,7 +105,8 @@ export default class Popular extends React.Component {
 
                 {error && <p>{error}</p>}
 
-                {repos[selectedLanguage] && <pre>{JSON.stringify(repos[selectedLanguage], null, 2)}</pre>}
+                // render reposGrid at the selected language
+                {repos[selectedLanguage] && <ReposGrid repos={repos[selectedLanguage]} />}
 
             </React.Fragment>
         )
