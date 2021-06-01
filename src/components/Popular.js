@@ -1,6 +1,6 @@
 import { Button, Flex } from "@chakra-ui/react";
 import React from "react";
-import { List, ListItem, ListIcon, OrderedList, UnorderedList } from "@chakra-ui/react"
+import { List, ListItem, ListIcon, Link } from "@chakra-ui/react"
 // proptypes package
 import PropTypes from "prop-types";
 // utils
@@ -32,14 +32,41 @@ function Languages({ selected, onUpdateLanguage }) {
 function ReposGrid ({ repos }) {
     return (
         <ul>
-            <pre> {JSON.stringify(repos, null, 2)} </pre> 
+            {/* <pre> {JSON.stringify(repos, null, 2)} </pre> */}
+            {/* // map over all repos  */}
+            {repos.map((repo, index) => {
+                {/* destructure the necessary properties off the repo object*/}
+                const { name, owner, html_url, stargazers_count, forks, open_issues } = repo
+                // destructure necessary properties off owner object
+                const { login, avatar_url,  } = owner
+
+                return (
+                    // make an li for each part of the card 
+                    <List key={html_url}>
+                        <h4>
+                            {/* value should be the index plus 1 */}
+                            #{index + 1}
+                        </h4>
+                        <img 
+                            src={avatar_url}
+                        />
+                        <h2>
+                <Link href={html_url} > {login}</Link>
+                        </h2>
+                    </List>
+                )
+
+            })}
+            
         </ul>
     )
 }
 
+
+
 // make a proptype for reposGrid. reposGrid should be an array and is required
 
-ReposGrid.prototype = {
+ReposGrid.propTypes = {
     repos: PropTypes.array.isRequired
 }
 
@@ -64,6 +91,7 @@ export default class Popular extends React.Component {
     }
 
 
+    
     updateLanguage(selectedLanguage) {
 
         this.setState({
@@ -111,7 +139,7 @@ export default class Popular extends React.Component {
 
                 {error && <p>{error}</p>}
 
-                // render reposGrid at the selected language
+                
                 {repos[selectedLanguage] && <ReposGrid repos={repos[selectedLanguage]} />}
 
             </React.Fragment>
