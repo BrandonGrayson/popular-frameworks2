@@ -1,10 +1,12 @@
-import { Button, Flex } from "@chakra-ui/react";
+import { Button, color, Flex } from "@chakra-ui/react";
 import React from "react";
-import { List, ListItem, ListIcon, Link } from "@chakra-ui/react"
+import { List, ListItem, ListIcon, Link, UnorderedList } from "@chakra-ui/react"
 // proptypes package
 import PropTypes from "prop-types";
 // utils
 import { fetchPopularRepos } from '../utils/fetchPopularRepos'
+// react icons
+import { FaUser, FaStar, FaCodeBranch, FaTriangle, FaExclamationTriangle } from "react-icons/fa"
 
 function Languages({ selected, onUpdateLanguage }) {
 
@@ -29,16 +31,16 @@ function Languages({ selected, onUpdateLanguage }) {
 }
 
 // Create a function that returns a grid componenent. Should take in a single prop called repos
-function ReposGrid ({ repos }) {
+function ReposGrid({ repos }) {
     return (
         <ul>
             {/* <pre> {JSON.stringify(repos, null, 2)} </pre> */}
             {/* // map over all repos  */}
             {repos.map((repo, index) => {
-                {/* destructure the necessary properties off the repo object*/}
+                {/* destructure the necessary properties off the repo object*/ }
                 const { name, owner, html_url, stargazers_count, forks, open_issues } = repo
                 // destructure necessary properties off owner object
-                const { login, avatar_url,  } = owner
+                const { login, avatar_url, } = owner
 
                 return (
                     // make an li for each part of the card 
@@ -47,17 +49,39 @@ function ReposGrid ({ repos }) {
                             {/* value should be the index plus 1 */}
                             #{index + 1}
                         </h4>
-                        <img 
+                        <img
                             src={avatar_url}
                         />
                         <h2>
-                <Link href={html_url} > {login}</Link>
+                            <Link href={html_url} > {login}</Link>
                         </h2>
+
+                        <List>
+                            <ListItem>
+                                <FaUser style={{ color: 'rgb(255, 191, 116)' }} />
+                            </ListItem>
+                            <Link href={`https://www.github.com/${login}`} > {login}</Link>
+                        </List>
+
+                        <List>
+                            <FaStar color='rgb(255, 215, 0)' />
+                            {stargazers_count.toLocaleString()} stars
+                        </List>
+                        <FaCodeBranch color='rgb(129, 195, 245)' />
+                            {forks.toLocaleString()} forks
+                        <List>
+                        <FaExclamationTriangle color='rgb(241, 138, 247)' />
+                            {open_issues.toLocaleString()} open issues
+                        </List>
+
+                        <List>
+                            
+                        </List>
                     </List>
                 )
 
             })}
-            
+
         </ul>
     )
 }
@@ -91,7 +115,7 @@ export default class Popular extends React.Component {
     }
 
 
-    
+
     updateLanguage(selectedLanguage) {
 
         this.setState({
@@ -133,13 +157,13 @@ export default class Popular extends React.Component {
 
         return (
             <React.Fragment>
-                <Languages selected={selectedLanguage} onUpdateLanguage={this.updateLanguage} />
+                <Languages key={selectedLanguage} selected={selectedLanguage} onUpdateLanguage={this.updateLanguage} />
 
                 {this.isLoading && <p>LOADING</p>}
 
                 {error && <p>{error}</p>}
 
-                
+
                 {repos[selectedLanguage] && <ReposGrid repos={repos[selectedLanguage]} />}
 
             </React.Fragment>
