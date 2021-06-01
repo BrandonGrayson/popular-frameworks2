@@ -28,13 +28,19 @@ function Languages({ selected, onUpdateLanguage }) {
     )
 }
 
-// create a function that destructures repos off the state
+// Create a function that returns a grid componenent. Should take in a single prop called repos
 function ReposGrid ({ repos }) {
     return (
         <ul>
-            <pre>{JSON.stringify(repos[selectedLanguage], null, 2)}</pre> 
+            <pre> {JSON.stringify(repos, null, 2)} </pre> 
         </ul>
     )
+}
+
+// make a proptype for reposGrid. reposGrid should be an array and is required
+
+ReposGrid.prototype = {
+    repos: PropTypes.array.isRequired
 }
 
 export default class Popular extends React.Component {
