@@ -34,13 +34,15 @@ function Languages({ selected, onUpdateLanguage }) {
 function ReposGrid({ repos }) {
     return (
         <ul>
-            {/* <pre> {JSON.stringify(repos, null, 2)} </pre> */}
+            <pre> {JSON.stringify(repos, null, 2)} </pre>
             {/* // map over all repos  */}
             {repos.map((repo, index) => {
                 {/* destructure the necessary properties off the repo object*/ }
                 const { name, owner, html_url, stargazers_count, forks, open_issues } = repo
                 // destructure necessary properties off owner object
                 const { login, avatar_url, } = owner
+
+                console.log(repo)
 
                 return (
                     // make an li for each part of the card 
@@ -59,8 +61,8 @@ function ReposGrid({ repos }) {
                         <List>
                             <ListItem>
                                 <FaUser style={{ color: 'rgb(255, 191, 116)' }} />
+                                <Link href={`https://www.github.com/${login}`} > {login} </Link>
                             </ListItem>
-                            <Link href={`https://www.github.com/${login}`} > {login}</Link>
                         </List>
 
                         <List>
@@ -73,13 +75,8 @@ function ReposGrid({ repos }) {
                         <FaExclamationTriangle color='rgb(241, 138, 247)' />
                             {open_issues.toLocaleString()} open issues
                         </List>
-
-                        <List>
-                            
-                        </List>
                     </List>
                 )
-
             })}
 
         </ul>
