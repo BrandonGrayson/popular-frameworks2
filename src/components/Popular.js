@@ -1,6 +1,6 @@
 import { Button, color, Flex } from "@chakra-ui/react";
 import React from "react";
-import { List, ListItem, ListIcon, Link, UnorderedList } from "@chakra-ui/react"
+import { List, ListItem, Link, AspectRatio, Image } from "@chakra-ui/react"
 // proptypes package
 import PropTypes from "prop-types";
 // utils
@@ -51,9 +51,11 @@ function ReposGrid({ repos }) {
                             {/* value should be the index plus 1 */}
                             #{index + 1}
                         </h4>
-                        <img
-                            src={avatar_url}
-                        />
+
+                        <AspectRatio maxW="400px" ratio={4 / 4}>
+                            <Image src={avatar_url} />
+                        </AspectRatio>
+                        
                         <h2>
                             <Link href={html_url} > {login}</Link>
                         </h2>
@@ -75,8 +77,6 @@ function ReposGrid({ repos }) {
                             {forks.toLocaleString()} forks
                         </ListItem>
 
-
-
                         <ListItem>
                         <FaExclamationTriangle color='rgb(241, 138, 247)' />
                             {open_issues.toLocaleString()} open issues
@@ -88,54 +88,6 @@ function ReposGrid({ repos }) {
         </ul>
     )
 }
-
-// function ReposGrid ({ repos }) {
-//     return (
-//       <ul className='grid space-around'>
-//         {repos.map((repo, index) => {
-//           const { name, owner, html_url, stargazers_count, forks, open_issues } = repo
-//           const { login, avatar_url } = owner
-  
-//           return (
-//             <li key={html_url} className='repo bg-light'>
-//               <h4 className='header-lg center-text'>
-//                 #{index + 1}
-//               </h4>
-//               <img
-//                 className='avatar'
-//                 src={avatar_url}
-//                 alt={`Avatar for ${login}`}
-//               />
-//               <h2 className='center-text'>
-//                 <a className='link' href={html_url}>{login}</a>
-//               </h2>
-//               <ul className='card-list'>
-//                 <li>
-//                   <FaUser color='rgb(255, 191, 116)' size={22} />
-//                   <a href={`https://github.com/${login}`}>
-//                     {login}
-//                   </a>
-//                 </li>
-//                 <li>
-//                   <FaStar color='rgb(255, 215, 0)' size={22} />
-//                   {stargazers_count.toLocaleString()} stars
-//                 </li>
-//                 <li>
-//                   <FaCodeBranch color='rgb(129, 195, 245)' size={22} />
-//                   {forks.toLocaleString()} forks
-//                 </li>
-//                 <li>
-//                   <FaExclamationTriangle color='rgb(241, 138, 147)' size={22} />
-//                   {open_issues.toLocaleString()} open
-//                 </li>
-//               </ul>
-//             </li>
-//           )
-//         })}
-//       </ul>
-//     )
-//   }
-
 
 // make a proptype for reposGrid. reposGrid should be an array and is required
 
@@ -162,8 +114,6 @@ export default class Popular extends React.Component {
     componentDidMount() {
         this.updateLanguage(this.state.selectedLanguage)
     }
-
-
 
     updateLanguage(selectedLanguage) {
 
