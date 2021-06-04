@@ -1,6 +1,6 @@
 import { Button, color, Flex } from "@chakra-ui/react";
 import React from "react";
-import { List, ListItem, Link, AspectRatio, Image } from "@chakra-ui/react"
+import { List, ListItem, Link, AspectRatio, Image, Heading } from "@chakra-ui/react"
 // proptypes package
 import PropTypes from "prop-types";
 // utils
@@ -47,18 +47,18 @@ function ReposGrid({ repos }) {
                 return (
                     // make an li for each part of the card 
                     <List key={html_url}>
-                        <h4>
+                        <Heading as='h4'>
                             {/* value should be the index plus 1 */}
                             #{index + 1}
-                        </h4>
+                        </Heading>
 
                         <AspectRatio maxW="400px" ratio={4 / 4}>
                             <Image src={avatar_url} />
                         </AspectRatio>
-                        
-                        <h2>
+
+                        <Heading as='h2'>
                             <Link href={html_url} > {login}</Link>
-                        </h2>
+                        </Heading>
 
                         <List>
                             <ListItem>
