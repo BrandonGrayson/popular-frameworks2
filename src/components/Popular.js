@@ -1,6 +1,6 @@
-import { Button, color, Flex } from "@chakra-ui/react";
+
 import React from "react";
-import { List, ListItem, Link, AspectRatio, Image, Heading } from "@chakra-ui/react"
+import { List, ListItem, Link, AspectRatio, Image, Heading, Box, Button, UnorderedList } from "@chakra-ui/react"
 // proptypes package
 import PropTypes from "prop-types";
 // utils
@@ -33,7 +33,7 @@ function Languages({ selected, onUpdateLanguage }) {
 // Create a function that returns a grid componenent. Should take in a single prop called repos
 function ReposGrid({ repos }) {
     return (
-        <ul>
+        <UnorderedList display='flex' justifyContent='space-around'>
             {/* <pre> {JSON.stringify(repos, null, 2)} </pre> */}
             {/* // map over all repos  */}
             {repos.map((repo, index) => {
@@ -46,46 +46,48 @@ function ReposGrid({ repos }) {
 
                 return (
                     // make an li for each part of the card 
-                    <List key={html_url}>
-                        <Heading as='h4'>
-                            {/* value should be the index plus 1 */}
+                    <Box display='flex' flexWrap='wrap' w='100%' >
+                        <List key={html_url}>
+                            <Heading fontSize='25px' fontWeight='300' m='20px'>
+                                {/* value should be the index plus 1 */}
                             #{index + 1}
-                        </Heading>
+                            </Heading>
 
-                        <AspectRatio maxW="400px" ratio={4 / 4}>
-                            <Image src={avatar_url} />
-                        </AspectRatio>
+                            <AspectRatio w='200px' h='200px' ratio={4 / 4} borderRadius='3px' my='0' mx='auto' display='block'>
+                                <Image src={avatar_url} />
+                            </AspectRatio>
 
-                        <Heading as='h2'>
-                            <Link href={html_url} > {login}</Link>
-                        </Heading>
+                            <Heading as='h2' textAlign='center'>
+                                <Link color='rgb(187, 46, 31)' textDecoration='none' fontWeight='bold' href={html_url} > {login}</Link>
+                            </Heading>
 
-                        <List>
+                            <List my='20px' mx='0' fontSize='20px'>
+                                <ListItem>
+                                    <FaUser style={{ color: 'rgb(255, 191, 116)' }} />
+                                    <Link href={`https://www.github.com/${login}`} > {login} </Link>
+                                </ListItem>
+                            </List>
+
                             <ListItem>
-                                <FaUser style={{ color: 'rgb(255, 191, 116)' }} />
-                                <Link href={`https://www.github.com/${login}`} > {login} </Link>
+                                <FaStar color='rgb(255, 215, 0)' />
+                                {stargazers_count.toLocaleString()} stars
+                            </ListItem>
+
+                            <ListItem>
+                                <FaCodeBranch color='rgb(129, 195, 245)' />
+                                {forks.toLocaleString()} forks
+                            </ListItem>
+
+                            <ListItem>
+                                <FaExclamationTriangle color='rgb(241, 138, 247)' />
+                                {open_issues.toLocaleString()} open issues
                             </ListItem>
                         </List>
-
-                        <ListItem>
-                            <FaStar color='rgb(255, 215, 0)' />
-                            {stargazers_count.toLocaleString()} stars
-                        </ListItem>
-
-                        <ListItem>
-                        <FaCodeBranch color='rgb(129, 195, 245)' />
-                            {forks.toLocaleString()} forks
-                        </ListItem>
-
-                        <ListItem>
-                        <FaExclamationTriangle color='rgb(241, 138, 247)' />
-                            {open_issues.toLocaleString()} open issues
-                        </ListItem>
-                    </List>
+                    </Box>
                 )
             })}
 
-        </ul>
+        </UnorderedList>
     )
 }
 
@@ -163,8 +165,9 @@ export default class Popular extends React.Component {
                 {error && <p>{error}</p>}
 
 
+               
                 {repos[selectedLanguage] && <ReposGrid repos={repos[selectedLanguage]} />}
-
+                
             </React.Fragment>
         )
     }
