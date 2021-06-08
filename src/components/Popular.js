@@ -33,9 +33,7 @@ function Languages({ selected, onUpdateLanguage }) {
 // Create a function that returns a grid componenent. Should take in a single prop called repos
 function ReposGrid({ repos }) {
     return (
-        <UnorderedList display='flex' justifyContent='space-around'>
-            {/* <pre> {JSON.stringify(repos, null, 2)} </pre> */}
-            {/* // map over all repos  */}
+        <UnorderedList display='flex' justifyContent='space-around' >
             {repos.map((repo, index) => {
                 {/* destructure the necessary properties off the repo object*/ }
                 const { name, owner, html_url, stargazers_count, forks, open_issues } = repo
@@ -62,26 +60,27 @@ function ReposGrid({ repos }) {
                             </Heading>
 
                             <List my='20px' mx='0' fontSize='20px'>
-                                <ListItem>
-                                    <FaUser style={{ color: 'rgb(255, 191, 116)' }} />
+                                <ListItem display='flex' alignItems='center' m='10px'>
+                                    <FaUser mr='5px' style={{ color: 'rgb(255, 191, 116)' }} />
                                     <Link href={`https://www.github.com/${login}`} > {login} </Link>
                                 </ListItem>
+
+
+                                <ListItem display='flex' alignItems='center' m='10px'>
+                                    <FaStar color='rgb(255, 215, 0)' />
+                                    {stargazers_count.toLocaleString()} stars
+                                </ListItem>
+
+                                <ListItem display='flex' alignItems='center' m='10px'>
+                                    <FaCodeBranch color='rgb(129, 195, 245)' />
+                                    {forks.toLocaleString()} forks
+                                </ListItem>
+
+                                <ListItem display='flex' alignItems='center' m='10px'>
+                                    <FaExclamationTriangle color='rgb(241, 138, 247)' />
+                                    {open_issues.toLocaleString()} open issues
+                                </ListItem>
                             </List>
-
-                            <ListItem>
-                                <FaStar color='rgb(255, 215, 0)' />
-                                {stargazers_count.toLocaleString()} stars
-                            </ListItem>
-
-                            <ListItem>
-                                <FaCodeBranch color='rgb(129, 195, 245)' />
-                                {forks.toLocaleString()} forks
-                            </ListItem>
-
-                            <ListItem>
-                                <FaExclamationTriangle color='rgb(241, 138, 247)' />
-                                {open_issues.toLocaleString()} open issues
-                            </ListItem>
                         </List>
                     </Box>
                 )
@@ -165,9 +164,9 @@ export default class Popular extends React.Component {
                 {error && <p>{error}</p>}
 
 
-               
+
                 {repos[selectedLanguage] && <ReposGrid repos={repos[selectedLanguage]} />}
-                
+
             </React.Fragment>
         )
     }
