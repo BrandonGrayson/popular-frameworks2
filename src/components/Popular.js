@@ -33,7 +33,7 @@ function Languages({ selected, onUpdateLanguage }) {
 // Create a function that returns a grid componenent. Should take in a single prop called repos
 function ReposGrid({ repos }) {
     return (
-        <UnorderedList display='flex' justifyContent='space-around' >
+        <UnorderedList display='flex' justifyContent='space-around' bgColor='rgba(0,0,0,0.08)' borderRadius='3px' >
             {repos.map((repo, index) => {
                 {/* destructure the necessary properties off the repo object*/ }
                 const { name, owner, html_url, stargazers_count, forks, open_issues } = repo
@@ -62,7 +62,7 @@ function ReposGrid({ repos }) {
                             <List my='20px' mx='0' fontSize='20px'>
                                 <ListItem display='flex' alignItems='center' m='10px'>
                                     <FaUser style={{ color: 'rgb(255, 191, 116)' }} />
-                                    <Link ml={3} href={`https://www.github.com/${login}`} > {login} </Link>
+                                    <Link fontWeight='500' color='inherit' ml={3} href={`https://www.github.com/${login}`} > {login} </Link>
                                 </ListItem>
 
 
