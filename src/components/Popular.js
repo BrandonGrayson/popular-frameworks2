@@ -1,6 +1,6 @@
 
 import React from "react";
-import { List, ListItem, Link, AspectRatio, Image, Heading, Box, Button, UnorderedList } from "@chakra-ui/react"
+import { List, ListItem, Link, AspectRatio, Image, Heading, Box, Button, UnorderedList, Text } from "@chakra-ui/react"
 // proptypes package
 import PropTypes from "prop-types";
 // utils
@@ -61,24 +61,24 @@ function ReposGrid({ repos }) {
 
                             <List my='20px' mx='0' fontSize='20px'>
                                 <ListItem display='flex' alignItems='center' m='10px'>
-                                    <FaUser mr='5px' style={{ color: 'rgb(255, 191, 116)' }} />
-                                    <Link href={`https://www.github.com/${login}`} > {login} </Link>
+                                    <FaUser style={{ color: 'rgb(255, 191, 116)' }} />
+                                    <Link ml={3} href={`https://www.github.com/${login}`} > {login} </Link>
                                 </ListItem>
 
 
                                 <ListItem display='flex' alignItems='center' m='10px'>
-                                    <FaStar color='rgb(255, 215, 0)' />
-                                    {stargazers_count.toLocaleString()} stars
+                                    <FaStar color='rgb(255, 215, 0)' mr121={4} />
+                                   <Text ml={3}>{stargazers_count.toLocaleString()} stars </Text> 
                                 </ListItem>
 
                                 <ListItem display='flex' alignItems='center' m='10px'>
                                     <FaCodeBranch color='rgb(129, 195, 245)' />
-                                    {forks.toLocaleString()} forks
+                                  <Text ml={3}> {forks.toLocaleString()} forks </Text>  
                                 </ListItem>
 
                                 <ListItem display='flex' alignItems='center' m='10px'>
                                     <FaExclamationTriangle color='rgb(241, 138, 247)' />
-                                    {open_issues.toLocaleString()} open issues
+                                   <Text ml={3}> {open_issues.toLocaleString()} open issues </Text> 
                                 </ListItem>
                             </List>
                         </List>
